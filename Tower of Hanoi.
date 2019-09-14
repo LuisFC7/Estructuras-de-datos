@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+void principal();
+void hanoi(int,char,char,char);
+
+int main (void)
+{
+	principal();
+	return 0;
+
+}
+
+void principal()
+{
+	char torre1='A';
+	char torre2='B';
+	char torre3='C';
+	printf("Enter number of disks: ");
+	int discos;
+	scanf("%d",&discos);
+	
+	hanoi(discos,torre1,torre2,torre3);
+	
+}
+
+void hanoi(int discos,char torre1, char torre2,char torre3)
+{
+	
+	if(discos==1)
+	{
+		printf("\n Disk number %d was moved %c -> %c",discos,torre1,torre3);
+		
+	}
+	else
+	{
+		hanoi(discos-1,torre1,torre3,torre2);
+		printf("\n Disk number %d was moved %c -> %c",discos,torre1,torre3);
+		hanoi(discos-1,torre2,torre1,torre3);
+	}
+}
