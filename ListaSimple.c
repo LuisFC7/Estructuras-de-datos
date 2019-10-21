@@ -1,4 +1,4 @@
-//Creacion de una lista simpleN
+//Creacion de una lista simple
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -9,19 +9,21 @@ void imprimir();
 struct Contigua
 {
 	int datos;
-	struct Contigua *siguiente = NULL;
+	struct Contigua *siguiente; 
 };
 
 struct Contigua *primero = NULL;
 struct Contigua *ultimo = NULL;
 
-main()
+int main(void)
 {
-	insertar();
-	insertar();
-	insertar();
-	insertar();
-	insertar();
+	int num;
+	printf("Number of nodes: ");
+	scanf("%d",&num);
+	while(num--)
+	{
+		insertar();
+	}
 	imprimir();
 	system("pause");
 	return 0;
