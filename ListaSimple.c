@@ -5,6 +5,8 @@
 void principal();
 void insertar();
 void imprimir();
+void buscar();
+void eliminar();
 
 struct Contigua
 {
@@ -25,6 +27,9 @@ int main(void)
 		insertar();
 	}
 	imprimir();
+	buscar();
+	printf("\n");
+	eliminar();
 	system("pause");
 	return 0;
 }
@@ -70,3 +75,94 @@ void imprimir()
 		printf("List is Empty");
 	}
 }
+
+void buscar()
+{
+	struct Contigua *actual=(struct Contigua*)malloc(sizeof(struct Contigua));
+	actual=primero;
+	
+	int snode=0;
+	int found=0;
+	
+	printf("Enter node to search: ");
+	scanf("%d",&snode);
+	
+	if(primero!=NULL)
+	{
+		while(actual!=NULL && found!=1)
+		{
+			if(actual->datos==snode)
+			{
+				found=1;
+			}
+			else
+			{
+				found=0;
+			}
+			
+			//Update node
+			actual=actual->siguiente;
+		}
+		if(found==1)
+			printf("Node was found");
+			else
+			printf("Node was not found");
+		
+	}else
+		printf("List is Empty");
+		
+}
+
+void eliminar()
+{
+	struct Contigua *actual=(struct Contigua*)malloc(sizeof(struct Contigua));
+	actual=primero;
+	
+	struct Contigua *anterior=(struct Contigua*)malloc(sizeof(struct Contigua));
+	anterior=NULL;
+	
+	int snode=0;
+	int found=0;	
+	printf("Enter node to delete: ");
+	scanf("%d",&snode);
+	
+	if(primero!=NULL)
+	{
+		while(actual!=NULL && found!=1)
+		{
+			if(actual->datos==snode)
+			{
+				//Cases
+				if(actual==primero)
+				{
+					primero=primero->siguiente;
+				}else if(actual==ultimo)
+				{
+					anterior->siguiente=NULL;
+				}else 
+				{
+					anterior->siguiente=actual->siguiente;
+				}
+				
+				printf("Node was deleted\n");
+				found=1;
+			}
+			
+			//Update node
+			anterior=actual;
+			actual=actual->siguiente;
+		}
+	
+			if(found==1)
+			{
+				free(anterior);
+			}
+			else
+			printf("Node was not found");
+			
+	}else
+	{
+		printf("List is Empty");
+	}
+}
+
