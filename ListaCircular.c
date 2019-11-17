@@ -7,6 +7,7 @@ void principal();
 void insertar();
 void imprimir();
 void buscar();
+void eliminar();
 
 struct circular
 {
@@ -28,6 +29,8 @@ int main(void)
 	}
 	imprimir();
 	buscar();
+	eliminar();
+	imprimir();
 	system("pause");
 	return 0;
 }
@@ -115,4 +118,60 @@ void buscar()
 		printf("\n\tList is Empty");
 
 		}
+}
+
+void eliminar()
+{
+	struct circular *actual = (struct *circular)malloc(sizeof(struct circular));
+	actual=primero;
+	struct circular *anterior = (struct *circular)malloc(sizeof(struct circular));
+	anterior = NULL;
+
+	int nodobuscado = 0;
+	int encontrado = 0;
+
+	printf("\nEnter node to delete");
+	scanf("%d",&nodobuscado);
+
+	if(primero!=NULL)
+	{
+		do{
+			if(actual->datos == nodobuscado)
+			{
+				printf("\nNode with data %d was found",nodobuscado);
+
+				if(actual==primero)
+				{
+					primero = primero -> siguiente;
+					ultimo -> siguiente = primero;
+
+				}else{
+					if(actual==ultimo)
+					{
+					anterior->siguiente=primero;
+					ultimo=anterior;
+					}else{
+						anterior->siguiente=actual->siguiente;
+
+						}
+					printf("\n\tNodo was deleted sucesfully");
+					encontrado=1;
+			}
+				anterior=actual;
+				actual=actual->siguiente;
+
+	
+		}while(actual!=primero && encontrado!=1);
+
+		if(encontrado==0)
+		{
+			printf("\n\tNodo was not found");
+
+		}else{
+			free(anterior);
+		}
+
+	}else{
+		printf("\n\tList is empty");
+	}
 }
