@@ -6,6 +6,7 @@
 void principal();
 void insertar();
 void imprimir();
+void buscar();
 
 struct circular
 {
@@ -26,6 +27,7 @@ int main(void)
 		insertar();
 	}
 	imprimir();
+	buscar();
 	system("pause");
 	return 0;
 }
@@ -78,8 +80,39 @@ void imprimir()
 	}
 	else
 	{
-		printf("\List is empty");
+		printf("\nList is empty");
 	}
 	
 }
 
+void buscar()
+{
+	struct circular *actual=(struct circular*)malloc(sizeof(struct circular));
+	actual=primero;
+	int encontrado=0;
+	int nodobuscado = 0;
+	printf("\n\tEnter data to search");
+	scanf("%d",&nodobuscado);
+
+	if(primero!=NULL)
+	{
+		do{
+			if(actual->datos==nodobuscado)
+			{
+				printf("\nNodo was found");
+				encontrado=1;
+			}
+
+			actual=actual->siguiente;
+		}while(actual!=primero && encontrado!=1);
+		
+			if(encontrado!=1)
+			{
+				printf("\n\tNodo was not found");
+			}
+
+	}else{
+		printf("\n\tList is Empty");
+
+		}
+}
