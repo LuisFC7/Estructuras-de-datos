@@ -5,6 +5,8 @@
 void insertar();
 void imprimiruno();
 void imprimirdos();
+void eliminar();
+
 
 struct doble
 {
@@ -32,6 +34,10 @@ int main(void)
 	
 	imprimiruno();
 	printf("\n*****");
+	imprimirdos();
+	eliminar();
+	imprimiruno();
+	printf("\n");
 	imprimirdos();
 	
 	return 0;
@@ -106,6 +112,69 @@ void imprimirdos()
 	}
 
 
+
+
+}
+
+void eliminar()
+{
+
+	struct doble *actual=(struct doble*)malloc(sizeof(struct doble));
+	actual=primero;
+
+	struct doble *anterior=(struct doble*)malloc(sizeof(struct doble));
+	anterior=NULL;
+
+	int nodobuscado=0;
+	int encontrado=0;
+
+	printf("\n\tEnter node to delete: ");
+	scanf("\n%d",&nodobuscado);
+
+	if(primero!=NULL)
+	{
+		while(actual!=NULL && encontrado != 1)
+		{	
+			
+			if(actual->datos == nodobuscado)
+			{
+				if(actual==primero)
+				{
+					primero=primero->siguiente;
+					primero->atras=NULL;
+				}else if(actual==ultimo)
+					{
+						anterior->siguiente=NULL;
+						ultimo=anterior;
+
+					}else {
+
+						anterior->siguiente=actual->siguiente;
+						actual->siguiente->atras=anterior;
+
+						}
+					printf("\nNode was eliminated");
+
+					encontrado=1;
+			}
+			anterior=actual;
+			actual=actual->siguiente;
+
+
+		}
+		if(encontrado==0)
+		{
+			printf("\nNodo was not found");
+
+
+
+		}else{
+
+			free(anterior);
+		}
+
+
+	}
 
 
 }
